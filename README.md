@@ -7,3 +7,5 @@ Lisää laskutus- ja training-asteen viikkonäkymään (Time Registration -> Wee
 Ainakin toimivia teemoja:
 - Default
 - Macoslike
+
+Lataa [tästä](https://github.com/sysart/achievo-chrome-plugin/raw/master/achievo-chrome-plugin.crx)
