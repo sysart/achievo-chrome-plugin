@@ -91,9 +91,9 @@ const checkPage = async (body) => {
 }
 
 const parseDayPage = (body) => {
-  return Array.from(body.querySelectorAll('table.recordlist tr:not(:first-child):not(:last-child'))
+  return Array.from(body.querySelectorAll('#admin tr:not(:first-child):not(:last-child'))
     .map(row => {
-      const [,, project, phase, activity,, time] = Array.from(row.querySelectorAll('td')).map(c => c.innerText.trim())
+      const [project, phase, activity,, time] = Array.from(row.querySelectorAll('td[onclick]')).map(c => c.innerText.trim())
       return {
         project,
         phase,
