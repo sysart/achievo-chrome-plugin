@@ -28,7 +28,6 @@ deploy:
   file: achievo-chrome-plugin.crx
   on:
     tags: true
-    branch: master
     repo: sysart/achievo-chrome-plugin
 
 
