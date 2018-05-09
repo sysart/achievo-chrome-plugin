@@ -1,0 +1,21 @@
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+before_install:
+- openssl aes-256-cbc -K $encrypted_66a8f91d9776_key -iv $encrypted_66a8f91d9776_iv
+  -in achievo-chrome-plugin.pem.enc -out achievo-chrome-plugin.pem -d
+- sh -e /etc/init.d/xvfb start
+before_deploy:
+- "google-chrome --pack-extension=./ --pack-extension-key=achievo-chrome-plugin.pem"
+deploy:
+  provider: releases
+  api_key:
+    secure: Z2vfu4Yvdp/pSDm3mglYLA3C5rCypwoMEPu8cNnj2LwsoblG6FHKMgKGY4xs8vLnnX1do0XtU+Hxp8XqpQGi7CF5J76e3c6ku6W6yh5lKESyhg1hDXD8ixfM9F1umUgQp3Rd6FH28KKu0L1WJEQrj7nNbyj17ZfE+Xvj0sPUG8i131+mJuXybvpeQKb621V96tt2ms09wI6zdNx32SPY0fnuMn1EhYQcVLlro3cAIPDVbSv4Z6Q39FBfbw4sYjBN3RZXHgqpF/+9JLaardGnlbyd8CUU4XuRAoQFFBGPEUULXJ+CPHKELKsLaERli7Ujs1Cy+Pi5mh7IEVyrbj8w3IRC4ev+zsPXg0x5323ZGomDILJ3iGIlYP0pS/ZdBRaoeN25RH3bqfjzaHYc7PNA40r5zjC3e3mFlYWHZaYOSXkEMPOlEdQ7ghbNl7i8fs3utXwkycGHjd7tbP+sh5kLAmYo4VkTDL9Nbwm8qg+m8CCSysVcv0VmPI7BZbtezSC1YIVjeyuebUjy/wGu0uen3z4ArpQpRnW2u/p5I1+2NdGcq2ab0f9vLIvfRU3Czs3nPT+smRl6OTV3SWiwU1lBvwiI0w4085f7sfoF6DdxFET67OfCaeTdxrg27g/PZB+K8/hWOHIRT/8mYmzsywj079kUpk3fZAzyPnUGQjRN9js=
+  file: achievo-chrome-plugin.crx
+  on:
+    repo: sysart/achievo-chrome-plugin
+
+
