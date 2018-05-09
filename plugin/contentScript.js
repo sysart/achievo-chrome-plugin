@@ -3,16 +3,10 @@
 
   setInterval(() => {
     const mainFrame = window.frames['main']
-    if (mainFrame && mainFrame.location !== lastLocation) {
-      mainFrame.addEventListener('load', () => {
-        const params = parseSearch(mainFrame.location.search)
-        const body = mainFrame.document.body
-        if (params.atknodetype === 'timereg.hours' && body.querySelector('form[name=weekview]')) {
-          checkPage(body)
-        }
-      })
-
-      lastLocation = mainFrame.location
+    const location = mainFrame.location.toString()
+    if (mainFrame && location !== lastLocation) {
+      checkPage(mainFrame)
+      lastLocation = location
     }
   }, 100)
 })()
@@ -31,7 +25,25 @@ const parseSearch = (search) => {
     }), {})
 }
 
-const checkPage = async (body) => {
+const checkPage = (frame) => {
+  const params = parseSearch(frame.location.search)
+  const body = frame.document.body
+
+  if (params.atknodetype !== 'timereg.hours') {
+    return
+  }
+
+  if (!body) {
+    frame.addEventListener('load', () => checkPage(frame))
+    return
+  }
+
+  if (body.querySelector('form[name=weekview]')) {
+    processPage(body)
+  }
+}
+
+const processPage = async (body) => {
   const table = body.querySelector('table.recordlist')
   const resultDiv = document.createElement('div')
   resultDiv.innerHTML = "Hakee prosentteja..."
