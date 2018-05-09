@@ -13,7 +13,7 @@ install:
 script:
 - echo "Script"
 before_deploy:
-- "chrome --pack-extension=./ --pack-extension-key=./achievo-chrome-plugin.pem"
+- "google-chrome --pack-extension=./ --pack-extension-key=./achievo-chrome-plugin.pem"
 deploy:
   provider: releases
   skip_cleanup: true
