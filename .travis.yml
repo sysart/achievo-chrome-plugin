@@ -5,9 +5,6 @@ node_js:
   - "8"
 addons:
   chrome: stable
-branches:
-  only:
-  - master
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
@@ -28,6 +25,3 @@ deploy:
   file: achievo-chrome-plugin.crx
   on:
     tags: true
-    repo: sysart/achievo-chrome-plugin
-
-
