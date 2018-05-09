@@ -13,7 +13,9 @@ install:
 script:
 - echo "Script"
 before_deploy:
-- google-chrome --pack-extension=./plugin --pack-extension-key=./achievo-chrome-plugin.pem
+- ls
+- pwd
+- google-chrome --pack-extension=plugin --pack-extension-key=achievo-chrome-plugin.pem
 - mv plugin.crx achievo-chrome-plugin.crx
 deploy:
   provider: releases
