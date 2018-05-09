@@ -4,11 +4,7 @@ language: node_js
 node_js:
   - "8"
 addons:
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
+  chrome: stable
 before_install:
 - openssl aes-256-cbc -K $encrypted_66a8f91d9776_key -iv $encrypted_66a8f91d9776_iv
   -in achievo-chrome-plugin.pem.enc -out achievo-chrome-plugin.pem -d
@@ -17,7 +13,7 @@ install:
 script:
 - echo "Script"
 before_deploy:
-- "google-chrome --pack-extension=./ --pack-extension-key=achievo-chrome-plugin.pem"
+- "chrome --pack-extension=./ --pack-extension-key=./achievo-chrome-plugin.pem"
 deploy:
   provider: releases
   skip_cleanup: true
