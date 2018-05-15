@@ -1,15 +1,17 @@
-(() => {
-  let lastLocation
+window.addEventListener('load', () => {
+  const params = parseSearch(location.search)
+  const body = document.body
 
-  setInterval(() => {
-    const mainFrame = window.frames['main']
-    const location = mainFrame.location.toString()
-    if (mainFrame && location !== lastLocation) {
-      checkPage(mainFrame)
-      lastLocation = location
-    }
-  }, 100)
-})()
+  if (params.atknodetype !== 'timereg.hours') {
+    return
+  }
+
+  if (!body.querySelector('form[name=weekview]')) {
+    return
+  }
+
+  processPage(body)
+})
 
 const parseSearch = (search) => {
   return search
@@ -23,24 +25,6 @@ const parseSearch = (search) => {
       ...acc,
       [key]: value
     }), {})
-}
-
-const checkPage = (frame) => {
-  const params = parseSearch(frame.location.search)
-  const body = frame.document.body
-
-  if (params.atknodetype !== 'timereg.hours') {
-    return
-  }
-
-  if (!body) {
-    frame.addEventListener('load', () => checkPage(frame))
-    return
-  }
-
-  if (body.querySelector('form[name=weekview]')) {
-    processPage(body)
-  }
 }
 
 const processPage = async (body) => {
